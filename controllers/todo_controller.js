@@ -7,7 +7,8 @@ var router = express.Router()
 router.get('/', function(req, res) {
 	models.Task.findAll({})
 	.then(function(tasks) {
-		res.json(tasks)
+		// res.json(tasks)
+		res.render('index', {tasks: tasks})
 	})
 	
 })
