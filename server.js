@@ -2,6 +2,7 @@ var express = require('express')
 var methodOverride = require('method-override')
 var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars')
+var models = require('./models')
 
 
 // Sets up the Express App
@@ -28,13 +29,14 @@ app.use(methodOverride('_method'))
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
-
 var routes = require('./controllers/todo_controller.js')
 app.use('/', routes)
 
 
-// Starts the server to begin listening
+// Starts the server to begin listening after sync sequelize model
 // =============================================================
-app.listen(PORT, function () {
-	console.log('App listening on PORT ' + PORT);
+models.sequelize.sync(/*{force: true}*/).then(function() {
+	app.listen(PORT, function () {
+		console.log('App listening on PORT ' + PORT);
+	})
 })
