@@ -1,0 +1,66 @@
+<div class="row row-centered">
+	<div class="col-md-12 col-centered">
+		<h2 class="text-center">Current Tasks</h2>
+	</div>
+</div>
+
+
+<div class="row row-centered">
+	<div class="col-md-6 col-centered">
+		<h3 class="text-center">Unfinished Tasks</h3>
+		<div class="row">
+				{{#each tasks}}
+					{{#unless this.completed}}
+					<div class="col-md-12">
+						<form action="/update/{{this.id}}?_method=PUT" method="POST">
+							<div class="col-md-6">
+								<p>ID: {{this.id}}; Name: {{this.todo_name}}</p>
+							</div>
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-primary btn-sm" id="submitButton">Mark Complete</button>
+							</div>
+						</form>	
+					</div>
+					{{/unless}}
+				{{/each}}
+		</div>
+	</div>
+	<div class="col-md-6 col-centered">
+		<h3 class="text-center">Finished Tasks</h3>
+		<div class="row">
+			{{#each tasks}}
+				{{#if this.completed}}
+				<div class="col-md-12">
+					<form action="/update/{{this.id}}?_method=PUT" method="POST">
+						<div>
+							<p class="text-center">ID: {{this.id}}; Name: {{this.todo_name}}</p>
+						</div>
+					</form>
+				</div>
+				{{/if}}
+			{{/each}}
+		</div>
+	</div>
+</div>
+
+<div class="row row-centered">
+	<div class="col-md-12 col-centered">
+		<h2 class="text-center">Add a Task</h2>
+			<form class="create-update-form centered" action="/new" method="POST">
+
+				<div class="form-group center-form center-block">
+					<label for="task" class="text-center">Task:</label>
+					<input type="text" id="task" name="name">
+				</div>
+
+				<div class="center-form"> 
+				  	<button type="submit" class="btn btn-primary btn-lg" id="submitButton">Submit Button</button>
+				</div>
+			  
+			</form>
+	</div>
+</div>
+
+
+
+
