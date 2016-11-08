@@ -23,8 +23,6 @@ router.post('/new', function(req, res) {
 })
 
 router.put('/update/:id', function(req, res) {
-	// var bodyID = req.body.id
-	// res.json(req.body)
 	models.Task.update({
 		completed: true
 	}, 
