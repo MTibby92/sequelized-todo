@@ -14,15 +14,26 @@ router.get('/', function(req, res) {
 })
 
 router.post('/new', function(req, res) {
-	todo.insertOne(req.body.name, req.body.boolean, function() {
+	models.Task.create({
+		name: req.body.name,
+		completed: req.body.boolean
+	}).then(function(){
 		res.redirect('/')
 	})
 })
 
 router.put('/update/:id', function(req, res) {
-	todo.updateOne(req.params.id, 'completed', true, function() {
+	// var bodyID = req.body.id
+	// res.json(req.body)
+	models.Task.update({
+		completed: true
+	}, 
+	{where: {id: req.params.id}}
+	)
+	.then(function() {
 		res.redirect('/')
 	})
+	
 })
 
 module.exports = router
